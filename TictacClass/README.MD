@@ -1,3 +1,5 @@
+
+
 tictactoe/
 ├── Board.h          # Game board logic
 ├── Board.cpp
@@ -9,49 +11,58 @@ tictactoe/
 └── Makefile
 
 
-########################################### SKELETAL
 
-#ifndef BOARD_H
-#define BOARD_H
 
-#include <array>
-#include <optional>
+# 🎮 Console Games Architecture Blueprint
 
-/**
- * Represents the 3x3 game board
- * Uses std::array for fixed-size, stack-allocated storage
- */
-class Board {
-private:
-    // ' ', 'X', or 'O' - using char for simplicity and easy printing
-    std::array<std::array<char, 3>, 3> cells;
-    
-    // Helper to check if a line (row, col, or diagonal) is all the same
-    bool checkLine(int row1, int col1, int row2, int col2, int row3, int col3) const;
-    
-public:
-    // Constructor - initializes empty board
-    Board();
-    
-    // Place a mark at position (row, col)
-    // Returns true if move was valid and placed
-    bool placeMark(int row, int col, char player);
-    
-    // Get mark at position (for display)
-    char getMark(int row, int col) const;
-    
-    // Check if a specific player has won
-    bool checkWin(char player) const;
-    
-    // Check if board is completely filled
-    bool isFull() const;
-    
-    // Reset board for new game
-    void reset();
-    
-    // Display board to console
-    void display() const;
-};
+## Project: Tic-Tac-Toe Production Implementation
 
-#endif
-###########################################SKELETAL
+### 📋 Core Architecture Decisions
+
+#### Why This Structure?
+- **Separation of Concerns** - Each file has one job
+- **Dependency Inversion** - High-level modules don't depend on low-level
+- **Open for Extension** - Add AI/Network players without touching Game class
+- **Testability** - Each component can be tested in isolation
+
+---
+
+## 🗂️ File Structure Map
+
+tictactoe/
+│
+├── Board.h/cpp # Game state & rules (The "Model")
+│ ├── Stores 3x3 grid
+│ ├── Validates moves
+│ ├── Detects win/draw
+│ └── Displays board
+│
+├── Game.h/cpp # Game flow (The "Controller")
+│ ├── Manages turns
+│ ├── Controls game loop
+│ ├── Processes moves
+│ └── Declares winner
+│
+├── Player.h/cpp # Player abstraction (The "Interface")
+│ ├── Pure virtual getMove()
+│ ├── Stores symbol X/O
+│ ├── Stores player name
+│ └── Enables polymorphism
+│
+├── HumanPlayer.h/cpp # Human input handler
+│ ├── Reads from console
+│ ├── Validates input
+│ ├── Handles errors
+│ └── Returns position
+│
+├── AIPlayer.h/cpp # Computer opponent (Optional)
+│ ├── Minimax algorithm
+│ ├── Perfect play
+│ ├── Difficulty levels
+│ └── No input needed
+│
+├── main.cpp # Entry point
+│ ├── Creates players
+│ ├── Injects dependencies
+│ ├── Starts game
+│ └── Handles menu
