@@ -1,0 +1,35 @@
+# --- C++ Compiled Binaries ---
+# ignoring executable and non code files 
+*.exe
+*.out
+*.app
+
+# --- Project Specific Folders ---
+# This ignores the 'executable' folder in Level 02  
+**/executable/
+**/build/
+**/bin/
+
+# --- Object Files and Intermediate Build Artifacts ---
+# These are created during the compilation process and aren't needed on GitHub
+*.o
+*.obj
+*.pdb
+*.ilk
+
+# --- IDE & Editor Junk ---
+# Ignores VS Code settings, Visual Studio hidden folders, and local history
+.vscode/
+.vs/
+.idea/
+*.swp
+*.user
+
+# --- OS Generated Files ---
+.DS_Store
+Thumbs.db
+
+# --- Temporary/Learning Files ---
+# If you make a quick 'test.cpp' to try something, it won't be pushed
+testing.cpp
+temp/
